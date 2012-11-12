@@ -27,7 +27,7 @@ describe 'tor::yum', :type => 'class' do
       }
       end
       it { should contain_yumrepo('tor').with(
-        :descr    => 'Tor experimental repo',
+        :descr    => 'Tor repo',
         :enabled  => '1',
         :gpgcheck => '1',
         :gpgkey   => 'http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.EL5.asc',
@@ -35,12 +35,12 @@ describe 'tor::yum', :type => 'class' do
         :priority => '50',
         :protect  => '0'
       )}
-      it { should contain_yumrepo('tor-source').with(
-        :descr    => 'Tor experimental source repo',
+      it { should contain_yumrepo('tor-testing').with(
+        :descr    => 'Tor testing repo',
         :enabled  => '0',
         :gpgcheck => '1',
         :gpgkey   => 'http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.EL5.asc',
-        :baseurl  => 'http://deb.torproject.org/torproject.org/rpm/el/5/SRPMS/',
+        :baseurl  => 'http://deb.torproject.org/torproject.org/rpm/tor-testing/el/5/$basearch/',
         :priority => '50',
         :protect  => '0'
       )}
@@ -55,7 +55,7 @@ describe 'tor::yum', :type => 'class' do
       }
       end
       it { should contain_yumrepo('tor').with(
-        :descr    => 'Tor experimental repo',
+        :descr    => 'Tor repo',
         :enabled  => '1',
         :gpgcheck => '1',
         :gpgkey   => 'http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.asc',
@@ -63,12 +63,12 @@ describe 'tor::yum', :type => 'class' do
         :priority => '50',
         :protect  => '0'
       )}
-      it { should contain_yumrepo('tor-source').with(
-        :descr    => 'Tor experimental source repo',
+      it { should contain_yumrepo('tor-testing').with(
+        :descr    => 'Tor testing repo',
         :enabled  => '0',
         :gpgcheck => '1',
         :gpgkey   => 'http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.asc',
-        :baseurl  => 'http://deb.torproject.org/torproject.org/rpm/el/6/SRPMS/',
+        :baseurl  => 'http://deb.torproject.org/torproject.org/rpm/tor-testing/el/6/$basearch/',
         :priority => '50',
         :protect  => '0'
       )}
@@ -85,7 +85,7 @@ describe 'tor::yum', :type => 'class' do
           }
           end
           it { should contain_yumrepo('tor').with(
-            :descr    => 'Tor experimental repo',
+            :descr    => 'Tor repo',
             :enabled  => '1',
             :gpgcheck => '1',
             :gpgkey   => 'http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.asc',
@@ -93,12 +93,12 @@ describe 'tor::yum', :type => 'class' do
             :priority => '50',
             :protect  => '0'
           )}
-          it { should contain_yumrepo('tor-source').with(
-            :descr    => 'Tor experimental source repo',
+          it { should contain_yumrepo('tor-testing').with(
+            :descr    => 'Tor testing repo',
             :enabled  => '0',
             :gpgcheck => '1',
             :gpgkey   => 'http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.asc',
-            :baseurl  => "http://deb.torproject.org/torproject.org/rpm/fc/#{mdr}/SRPMS/",
+            :baseurl  => "http://deb.torproject.org/torproject.org/rpm/tor-testing/fc/#{mdr}/$basearch/",
             :priority => '50',
             :protect  => '0'
           )}

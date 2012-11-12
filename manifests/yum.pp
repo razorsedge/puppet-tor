@@ -51,7 +51,7 @@ class tor::yum (
         default => $::lsbmajdistrelease,
       }
       yumrepo { 'tor':
-        descr    => 'Tor experimental repo',
+        descr    => 'Tor repo',
         enabled  => 1,
         gpgcheck => 1,
         gpgkey   => $majdistrelease ? {
@@ -62,35 +62,35 @@ class tor::yum (
         priority => $yum_priority,
         protect  => $yum_protect,
       }
-      yumrepo { 'tor-source':
-        descr    => 'Tor experimental source repo',
+      yumrepo { 'tor-testing':
+        descr    => 'Tor testing repo',
         enabled  => 0,
         gpgcheck => 1,
         gpgkey   => $majdistrelease ? {
           '5'     => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.EL5.asc",
           default => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
         },
-        baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${majdistrelease}/SRPMS/",
+        baseurl  => "${yum_server}${yum_path}/tor-testing/${tor::params::baseurl_string}/${majdistrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
       }
     }
     'Fedora': {
       yumrepo { 'tor':
-        descr    => 'Tor experimental repo',
+        descr    => 'Tor repo',
         enabled  => 1,
         gpgcheck => 1,
         gpgkey   => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
-        baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${operatingsystemrelease}/\$basearch/",
+        baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${::operatingsystemrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
       }
-      yumrepo { 'tor-source':
-        descr    => 'Tor experimental source repo',
+      yumrepo { 'tor-testing':
+        descr    => 'Tor testing repo',
         enabled  => 0,
         gpgcheck => 1,
         gpgkey   => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
-        baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${operatingsystemrelease}/SRPMS/",
+        baseurl  => "${yum_server}${yum_path}/tor-testing/${tor::params::baseurl_string}/${::operatingsystemrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
       }
