@@ -25,6 +25,57 @@ class tor::params {
 
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
+  $socksport = $::tor_socksport ? {
+    undef   => '127.0.0.1:9050',
+    default => $::tor_socksport,
+  }
+
+  $sockspolicy = $::tor_sockspolicy ? {
+    undef   => 'accept *:*',
+    default => $::tor_sockspolicy,
+  }
+
+  $orport = $::tor_orport ? {
+    undef   => '0',
+    default => $::tor_orport,
+  }
+
+  $bandwidthrate = $::tor_bandwidthrate ? {
+    undef   => '5 MB',
+    default => $::tor_bandwidthrate,
+  }
+
+  $bandwidthburst = $::tor_bandwidthburst ? {
+    undef   => '10 MB',
+    default => $::tor_bandwidthburst,
+  }
+
+  $numcpus = $::tor_numcpus ? {
+    undef   => '0',
+    default => $::tor_numcpus,
+  }
+
+  $dirport = $::tor_dirport ? {
+    undef   => '0',
+    default => $::tor_dirport,
+  }
+
+  $exitpolicy = $::tor_exitpolicy ? {
+    undef   => [ 'reject *:25', 'reject *:119', 'reject *:135-139', 'reject *:445', 'reject *:563', 'reject *:1214', 'reject *:4661-4666', 'reject *:6346-6429', 'reject *:6699', 'reject *:6881-6999', 'accept *:*' ],
+    #undef   => 'reject *:25,reject *:119,reject *:135-139,reject *:445,reject *:563,reject *:1214,reject *:4661-4666,reject *:6346-6429,reject *:6699,reject *:6881-6999,accept *:*',
+    default => $::tor_exitpolicy,
+  }
+
+  # If it's undef, that's fine
+  $address = $::tor_address
+  $outboundbindaddress = $::tor_outboundbindaddress
+  $nickname = $::tor_nickname
+  $myfamily = $::tor_myfamily
+  $contactinfo = $::tor_contactinfo
+  $dirportfrontpage = $::tor_dirportfrontpage
+
+  ######################################################################
+
   $ensure = $::tor_ensure ? {
     undef   => 'present',
     default => $::tor_ensure,
@@ -37,7 +88,7 @@ class tor::params {
 
   $file_name = $::tor_file_name ? {
     undef   => '/etc/tor/torrc',
-    default => $::tor_filee_name,
+    default => $::tor_file_name,
   }
 
   $service_ensure = $::tor_service_ensure ? {

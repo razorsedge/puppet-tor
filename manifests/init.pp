@@ -34,6 +34,21 @@
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class tor (
+  $socksport           = $tor::params::socksport,
+  $sockspolicy         = $tor::params::sockspolicy,
+  $orport              = $tor::params::orport,
+  $address             = $tor::params::address,
+  $outboundbindaddress = $tor::params::outboundbindaddress,
+  $nickname            = $tor::params::nickname,
+  $myfamily            = $tor::params::myfamily,
+  $bandwidthrate       = $tor::params::bandwidthrate,
+  $bandwidthburst      = $tor::params::bandwidthburst,
+  $numcpus             = $tor::params::numcpus,
+  $contactinfo         = $tor::params::contactinfo,
+  $dirport             = $tor::params::dirport,
+  $dirportfrontpage    = $tor::params::dirportfrontpage,
+  $exitpolicy          = $tor::params::exitpolicy,
+
   $ensure             = $tor::params::ensure,
   $autoupgrade        = $tor::params::safe_autoupgrade,
   $package_name       = $tor::params::package_name,
@@ -76,6 +91,8 @@ class tor (
       fail('ensure parameter must be present or absent')
     }
   }
+
+#  include tor::yum
 
   package { $package_name :
     ensure  => $package_ensure,
