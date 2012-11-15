@@ -1,6 +1,7 @@
 # == Class: tor
 #
 # This class handles installing the Tor onion router.
+# https://www.torproject.org/
 #
 # === Parameters
 #
