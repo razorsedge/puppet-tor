@@ -1,7 +1,8 @@
 Tor Module
 ==========
 
-[![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tor.png?branch=master)](http://travis-ci.org/razorsedge/puppet-tor)
+master branch [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tor.png?branch=master)](http://travis-ci.org/razorsedge/puppet-tor)
+develop branch [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tor.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-tor)
 
 Introduction
 ------------
@@ -15,7 +16,7 @@ Actions:
 
 OS Support:
 
-* RedHat family - tested on CentOS 5.5+ and CentOS 6.2+
+* RedHat family - tested on CentOS 5.8+ and CentOS 6.3+
 * Debian family - presently unsupported (patches welcome)
 
 Class documentation is available via puppetdoc.
