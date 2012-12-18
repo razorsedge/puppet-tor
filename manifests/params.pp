@@ -5,11 +5,11 @@
 # the variable doesn't exist in top scope, it falls back to a hard coded default
 # value.
 #
-# === Authors
+# === Authors:
 #
 # Mike Arnold <mike@razorsedge.org>
 #
-# === Copyright
+# === Copyright:
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
@@ -72,7 +72,6 @@ class tor::params {
   $nickname = $::tor_nickname
   $myfamily = $::tor_myfamily
   $contactinfo = $::tor_contactinfo
-  $dirportfrontpage = $::tor_dirportfrontpage
 
   ######################################################################
 

@@ -1,37 +1,41 @@
 # == Class: tor::yum
 #
-# Full description of class tor::yum here.
+# This class will install the YUM repository for Tor on supported operating
+# systems.
 #
-# === Parameters
+# === Parameters:
 #
-# Document parameters here.
+# [*yum_server*]
+#   The URL for the YUM server host.
+#   Default: http://deb.torproject.org
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*yum_path*]
+#   The URL path.
+#   Default: /torproject.org/rpm
 #
-# === Variables
+# [*yum_priority*]
+#   The priority that the Tor YUM repos will have.
+#   Default: 50
 #
-# Here you should define a list of variables that this module would require.
+# [*yum_protect*]
+#   Whether to protect this YUM repo.
+#   Default: 0
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
+# === Actions:
 #
-# === Example
+# Configures a YUM repository on supported operating systems.
+#
+# === Sample Usage:
 #
 #  class { tor::yum:
 #    yum_server => 'http://localhost/'
 #  }
 #
-# === Authors
+# === Authors:
 #
 # Mike Arnold <mike@razorsedge.org>
 #
-# === Copyright
+# === Copyright:
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
@@ -97,5 +101,4 @@ class tor::yum (
     }
     default: { }
   }
-
 }

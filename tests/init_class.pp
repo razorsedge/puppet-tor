@@ -11,6 +11,5 @@ class { 'tor':
   numcpus             => '2',
   contactinfo         => 'Random Person <nobody AT example dot com>',
   dirport             => [ '80 NoListen', '10.2.3.4:9091 NoAdvertise' ],
-  dirportfrontpage    => '/etc/tor/tor-exit-notice.html',
   exitpolicy          => [ 'reject *:*' ],
 }

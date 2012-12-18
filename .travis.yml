@@ -19,4 +19,5 @@ env:
   - PUPPET_VERSION=2.7.6        # PE 2.0
   - PUPPET_VERSION=2.7.9        # PE 2.0.1+
   - PUPPET_VERSION=2.7.12       # PE 2.5
-  - PUPPET_VERSION=2.7.19       # PE 2.6.0; latest 2.7
+  - PUPPET_VERSION=2.7.19       # PE 2.6.0, PE 2.7.0
+  - PUPPET_VERSION=2.7.20       # latest 2.7

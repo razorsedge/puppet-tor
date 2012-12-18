@@ -3,34 +3,85 @@
 # This class handles installing the Tor onion router.
 # https://www.torproject.org/
 #
-# === Parameters
+# === Parameters:
 #
-# Document parameters here.
+# [*ensure*]
+#   Ensure if present or absent.
+#   Default: present
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*autoupgrade*]
+#   Upgrade package automatically, if there is a newer version.
+#   Default: false
 #
-# === Variables
+# [*package_name*]
+#   Name of the package.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
 #
-# Here you should define a list of variables that this module would require.
+# [*file_name*]
+#   Name of the client config file.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
+# [*service_ensure*]
+#   Ensure if service is running or stopped.
+#   Default: running
 #
-# === Example
+# [*service_name*]
+#   Name of the service
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
 #
-#  class { tor: }
+# [*service_enable*]
+#   Start service at boot.
+#   Default: false
 #
-# === Authors
+# [*service_hasrestart*]
+#   Service has restart command.
+#   Default: true
+#
+# [*service_hasstatus*]
+#   Service has status command.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: true
+#
+# === Actions:
+#
+# Installs the tor package.
+# Manages the torrc file.
+# Starts the tor service.
+#
+# === Sample Usage:
+#
+#  # default client
+#  class { 'tor': }
+#
+#  # relay only
+#  class { 'tor':
+#    socksport           => [ '0' ],
+#    sockspolicy         => [ 'reject *' ],
+#    orport              => [ '443 NoListen', '10.2.3.4:9090 NoAdvertise' ],
+#    address             => '10.2.3.4',
+#    outboundbindaddress => '10.2.3.4',
+#    nickname            => 'ididnteditheconfig',
+#    myfamily            => '10.2.3.5',
+#    bandwidthrate       => '100 MB',
+#    bandwidthburst      => '200 MB',
+#    numcpus             => '2',
+#    contactinfo         => 'Random Person <nobody AT example dot com>',
+#    dirport             => [ '80 NoListen', '10.2.3.4:9091 NoAdvertise' ],
+#    exitpolicy          => [ 'reject *:*' ],
+#  }
+#
+# === Authors:
 #
 # Mike Arnold <mike@razorsedge.org>
 #
-# === Copyright
+# === Copyright:
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
@@ -47,18 +98,17 @@ class tor (
   $numcpus             = $tor::params::numcpus,
   $contactinfo         = $tor::params::contactinfo,
   $dirport             = $tor::params::dirport,
-  $dirportfrontpage    = $tor::params::dirportfrontpage,
   $exitpolicy          = $tor::params::exitpolicy,
 
-  $ensure             = $tor::params::ensure,
-  $autoupgrade        = $tor::params::safe_autoupgrade,
-  $package_name       = $tor::params::package_name,
-  $file_name          = $tor::params::file_name,
-  $service_ensure     = $tor::params::service_ensure,
-  $service_name       = $tor::params::service_name,
-  $service_enable     = $tor::params::safe_service_enable,
-  $service_hasrestart = $tor::params::safe_service_hasrestart,
-  $service_hasstatus  = $tor::params::service_hasstatus
+  $ensure              = $tor::params::ensure,
+  $autoupgrade         = $tor::params::safe_autoupgrade,
+  $package_name        = $tor::params::package_name,
+  $file_name           = $tor::params::file_name,
+  $service_ensure      = $tor::params::service_ensure,
+  $service_name        = $tor::params::service_name,
+  $service_enable      = $tor::params::safe_service_enable,
+  $service_hasrestart  = $tor::params::safe_service_hasrestart,
+  $service_hasstatus   = $tor::params::service_hasstatus
 ) inherits tor::params {
   # Validate our booleans
   validate_bool($autoupgrade)

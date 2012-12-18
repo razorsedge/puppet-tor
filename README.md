@@ -27,11 +27,13 @@ Examples
     # Top Scope variable (i.e. via Dashboard):
     tor_socksport = '127.0.0.1:9050'
     include 'tor'
+    include 'tor::yum'
 
     # Parameterized Class:
     class { 'tor':
       socksport => '127.0.0.1:9050',
     }
+    class { 'tor::yum': }
 
 Notes
 -----
@@ -46,7 +48,7 @@ Issues
 TODO
 ----
 
-* None
+* Allow users to choose Fedora or EPEL YUM repos?
 
 License
 -------
