@@ -27,13 +27,11 @@ Examples
     # Top Scope variable (i.e. via Dashboard):
     tor_socksport = '127.0.0.1:9050'
     include 'tor'
-    include 'tor::yum'
 
     # Parameterized Class:
     class { 'tor':
       socksport => '127.0.0.1:9050',
     }
-    class { 'tor::yum': }
 
 Notes
 -----
@@ -49,6 +47,7 @@ TODO
 ----
 
 * Allow users to choose Fedora or EPEL YUM repos?
+* Allow for removal of yumrepo.
 
 License
 -------
@@ -59,4 +58,8 @@ Copyright
 ---------
 
 Copyright (C) 2012 Mike Arnold <mike@razorsedge.org>
+
+[razorsedge/puppet-tor on GitHub](https://github.com/razorsedge/puppet-tor)
+
+[razorsedge/tor on Puppet Forge](http://forge.puppetlabs.com/razorsedge/tor)
 

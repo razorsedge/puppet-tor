@@ -5,6 +5,22 @@
 #
 # === Parameters:
 #
+# [*yum_server*]
+#   The URL for the YUM server host.
+#   Default: http://deb.torproject.org
+#
+# [*yum_path*]
+#   The URL path.
+#   Default: /torproject.org/rpm
+#
+# [*yum_priority*]
+#   The priority that the Tor YUM repos will have.
+#   Default: 50
+#
+# [*yum_protect*]
+#   Whether to protect this YUM repo.
+#   Default: 0
+#
 # [*ensure*]
 #   Ensure if present or absent.
 #   Default: present
@@ -100,6 +116,11 @@ class tor (
   $dirport             = $tor::params::dirport,
   $exitpolicy          = $tor::params::exitpolicy,
 
+  $yum_server          = $tor::params::yum_server,
+  $yum_path            = $tor::params::yum_path,
+  $yum_priority        = $tor::params::yum_priority,
+  $yum_protect         = $tor::params::yum_protect,
+
   $ensure              = $tor::params::ensure,
   $autoupgrade         = $tor::params::safe_autoupgrade,
   $package_name        = $tor::params::package_name,
@@ -143,10 +164,17 @@ class tor (
     }
   }
 
-#  include tor::yum
+  Class['tor::yum'] -> Class['tor']
+
+  class { 'tor::yum' :
+    yum_server   => $yum_server,
+    yum_path     => $yum_path,
+    yum_priority => $yum_priority,
+    yum_protect  => $yum_protect,
+  }
 
   package { $package_name :
-    ensure  => $package_ensure,
+    ensure => $package_ensure,
   }
 
   file { $file_name :
@@ -166,5 +194,4 @@ class tor (
     hasstatus  => $service_hasstatus,
     require    => Package[$package_name],
   }
-
 }
