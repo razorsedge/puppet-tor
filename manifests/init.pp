@@ -2,8 +2,77 @@
 #
 # This class handles installing the Tor onion router.
 # https://www.torproject.org/
+# Default configuration is to be a tor client.
 #
 # === Parameters:
+#
+# [*socksport*]
+#   Open this port to listen for connections from SOCKS-speaking applications.
+#   Default: 127.0.0.1:9050
+#
+# [*sockspolicy*]
+#   Set an entrance policy for this server, to limit who can connect to the
+#   SocksPort.
+#   Default: accept *:*
+#
+# [*orport*]
+#   Advertise this port to listen for connections from Tor clients and servers.
+#   This option is required to be a Tor server.
+#   Default: 0
+#
+# [*address*]
+#   The IP address or fully qualified domain name of this server. You can leave
+#   this unset, and Tor will guess your IP address. This IP address is the one
+#   used to tell clients and other servers where to find your Tor server; it
+#   doesn’t affect the IP that your Tor client binds to.
+#   Default: none
+#
+# [*outboundbindaddress*]
+#   Make all outbound connections originate from the IP address specified. This
+#   is only useful when you have multiple network interfaces, and you want all
+#   of Tor’s outgoing connections to use a single one.
+#   Default: none
+#
+# [*nickname*]
+#   Set the server’s nickname to 'name'. Nicknames must be between 1 and 19
+#   characters inclusive, and must contain only the characters [a-zA-Z0-9].
+#   Default: none
+#
+# [*myfamily*]
+#   Declare that this Tor server is controlled or administered by a group or
+#   organization identical or similar to that of the other servers, defined by
+#   their identity fingerprints or nicknames.
+#   Default: none
+#
+# [*bandwidthrate*]
+#   A token bucket limits the average incoming bandwidth usage on this node to
+#   the specified number of bytes per second, and the average outgoing
+#   bandwidth usage to that same value.
+#   Default: 5 MB
+#
+# [*bandwidthburst*]
+#   Limit the maximum token bucket size (also known as the burst) to the given
+#   number of bytes in each direction.
+#   Default: 10 MB
+#
+# [*numcpus*]
+#   How many processes to use at once for decrypting onionskins and other
+#   parallelizable operations.
+#   Default: 0 (autodetect)
+#
+# [*contactinfo*]
+#   Administrative contact information for server.
+#   Default: none
+#
+# [*dirport*]
+#   If this option is nonzero, advertise the directory service on this port.
+#   Default: 0
+#
+# [*exitpolicy*]
+#   Set an exit policy for this server.
+#   Default: reject *:25,reject *:119,reject *:135-139,reject *:445,
+#            reject *:563,reject *:1214,reject *:4661-4666,reject *:6346-6429,
+#            reject *:6699,reject *:6881-6999,accept *:*
 #
 # [*yum_server*]
 #   The URL for the YUM server host.
