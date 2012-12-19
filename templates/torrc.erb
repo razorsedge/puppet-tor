@@ -1,0 +1,40 @@
+###
+### File managed by Puppet
+###
+
+<% socksport.each do |socksportarray| -%>
+SocksPort <%= socksportarray %>
+<% end -%>
+<% sockspolicy.each do |sockspolicyarray| -%>
+SocksPolicy <%= sockspolicyarray %>
+<% end -%>
+<% orport.each do |orportarray| -%>
+ORPort <%= orportarray %>
+<% end -%>
+<% if @address -%>
+Address <%= address %>
+<% end -%>
+<% if @outboundbindaddress -%>
+OutboundBindAddress <%= outboundbindaddress %>
+<% end -%>
+<% if @nickname -%>
+Nickname <%= nickname %>
+<% end -%>
+BandwidthRate <%= bandwidthrate %>
+BandwidthBurst <%= bandwidthburst %>
+<% if @contactinfo -%>
+ContactInfo <%= contactinfo %>
+<% end -%>
+<% dirport.each do |dirportarray| -%>
+DirPort <%= dirportarray %>
+<% end -%>
+<% if @dirportfrontpage -%>
+DirPortFrontPage <%= dirportfrontpage %>
+<% end -%>
+<% if @myfamily -%>
+MyFamily <%= myfamily %>
+<% end -%>
+<% exitpolicy.each do |exitpolicyarray| -%>
+ExitPolicy <%= exitpolicyarray %>
+<% end -%>
+NumCpus <%= numcpus %>
