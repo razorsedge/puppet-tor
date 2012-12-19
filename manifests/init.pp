@@ -64,6 +64,12 @@
 #   Administrative contact information for server.
 #   Default: none
 #
+# [*dirportfrontpage*]
+#   When this option is set, it takes an HTML file and publishes it as "/" on
+#   the DirPort. Now relay operators can provide a disclaimer without needing
+#   to set up a separate webserver.
+#   Default: none
+#
 # [*dirport*]
 #   If this option is nonzero, advertise the directory service on this port.
 #   Default: 0
@@ -159,6 +165,7 @@
 #    numcpus             => '2',
 #    contactinfo         => 'Random Person <nobody AT example dot com>',
 #    dirport             => [ '80 NoListen', '10.2.3.4:9091 NoAdvertise' ],
+#    dirportfrontpage    => '/etc/tor/tor-exit-notice.html',
 #    exitpolicy          => [ 'reject *:*' ],
 #  }
 #
@@ -183,6 +190,7 @@ class tor (
   $numcpus             = $tor::params::numcpus,
   $contactinfo         = $tor::params::contactinfo,
   $dirport             = $tor::params::dirport,
+  $dirportfrontpage    = $tor::params::dirportfrontpage,
   $exitpolicy          = $tor::params::exitpolicy,
 
   $yum_server          = $tor::params::yum_server,
@@ -254,6 +262,17 @@ class tor (
     content => template('tor/torrc.erb'),
     require => Package[$package_name],
     notify  => Service[$service_name],
+  }
+
+  if $dirportfrontpage {
+    file { $dirportfrontpage :
+      ensure  => $file_ensure,
+      mode    => '0644',
+      owner   => 'root',
+      group   => '_tor',
+      content => template('tor/exit-notice.html.erb'),
+      require => Package[$package_name],
+    }
   }
 
   service { $service_name :

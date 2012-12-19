@@ -72,6 +72,7 @@ class tor::params {
   $nickname = $::tor_nickname
   $myfamily = $::tor_myfamily
   $contactinfo = $::tor_contactinfo
+  $dirportfrontpage = $::tor_dirportfrontpage
 
   ######################################################################
 
