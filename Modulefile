@@ -10,5 +10,5 @@ description 'https://www.torproject.org/'
 dependency 'puppetlabs/stdlib', '>=2.2.0'
 
 # Generate the changelog file
-system("git-log-to-changelog > CHANGELOG")
-$? == 0 or fail "changelog generation #{$?}!"
+#system("git-log-to-changelog > CHANGELOG")
+#$? == 0 or fail "changelog generation #{$?}!"
