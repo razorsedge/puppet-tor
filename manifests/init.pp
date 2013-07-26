@@ -208,6 +208,13 @@ class tor (
   $service_hasrestart  = $tor::params::safe_service_hasrestart,
   $service_hasstatus   = $tor::params::service_hasstatus
 ) inherits tor::params {
+  # Validate our arrays
+  validate_array($socksport)
+  validate_array($sockspolicy)
+  validate_array($orport)
+  validate_array($dirport)
+  validate_array($exitpolicy)
+
   # Validate our booleans
   validate_bool($autoupgrade)
   validate_bool($service_enable)
