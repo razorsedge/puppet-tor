@@ -49,6 +49,11 @@ TODO
 * Allow users to choose Fedora or EPEL YUM repos?
 * Allow for removal of yumrepo.
 
+Contributing
+------------
+
+Please see DEVELOP.md for contribution information.
+
 License
 -------
 
