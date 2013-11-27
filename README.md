@@ -28,6 +28,9 @@ Examples
     tor_socksport = '127.0.0.1:9050'
     include 'tor'
 
+    # Declare yum repository if needed
+    include 'tor::yum'
+
     # Parameterized Class:
     class { 'tor':
       socksport => '127.0.0.1:9050',

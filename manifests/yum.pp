@@ -45,6 +45,9 @@ class tor::yum (
   $yum_priority = $tor::params::yum_priority,
   $yum_protect  = $tor::params::yum_protect
 ) inherits tor::params {
+
+  Class['tor::yum'] -> Class['tor']
+
   # We use $::operatingsystem and not $::osfamily because certain things
   # (like Fedora) need to be excluded.
   case $::operatingsystem {
