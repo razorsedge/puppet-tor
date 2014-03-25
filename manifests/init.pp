@@ -184,6 +184,14 @@ class tor (
   $contactinfo         = $tor::params::contactinfo,
   $dirport             = $tor::params::dirport,
   $exitpolicy          = $tor::params::exitpolicy,
+  $controlport         = $tor::params::controlport,
+  $hashedcontrolpassword  = $tor::params::hashedcontrolpassword,
+  $cookieauthentication   = $tor::params::cookieauthentication,
+  $excludesinglehoprelays = $tor::params::excludesinglehoprelays,
+  $enforcedistinctsubnets = $tor::params::enforcedistinctsubnets,
+  $allowsinglehopcircuits = $tor::params::allowsinglehopcircuits,
+  $exitnodes              = $tor::params::exitnodes,
+  $strictnodes            = $tor::params::strictnodes,
 
   $yum_server          = $tor::params::yum_server,
   $yum_path            = $tor::params::yum_path,
@@ -246,12 +254,22 @@ class tor (
     ensure => $package_ensure,
   }
 
+  $template_file_name = $osfamily ? {
+    'Debian'           => 'tor/torrc.debian.erb',
+    default            => 'tor/torrc.erb',
+  }
+
+  $group = $osfamily ? {
+    'Debian'           => 'root',
+    default            => '_tor',
+  }
+
   file { $file_name :
     ensure  => $file_ensure,
     mode    => '0644',
     owner   => 'root',
-    group   => '_tor',
-    content => template('tor/torrc.erb'),
+    group   => $group,
+    content => template($template_file_name),
     require => Package[$package_name],
     notify  => Service[$service_name],
   }

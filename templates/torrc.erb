@@ -38,3 +38,27 @@ MyFamily <%= myfamily %>
 ExitPolicy <%= exitpolicyarray %>
 <% end -%>
 NumCpus <%= numcpus %>
+<% if controlport -%>
+ControlPort <%= controlport %>
+<% end -%>
+<% if hashedcontrolpassword -%>
+HashedControlPassword <%= hashedcontrolpassword %>
+<% end -%>
+<% if cookieauthentication -%>
+CookieAuthentication <%= cookieauthentication %>
+<% end -%>
+<% if excludesinglehoprelays -%>
+ExcludeSingleHopRelays <%= excludesinglehoprelays %>
+<% end -%>
+<% if enforcedistinctsubnets -%>
+EnforceDistinctSubnets <%= enforcedistinctsubnets %>
+<% end -%>
+<% if allowsinglehopcircuits -%>
+AllowSingleHopCircuits <%= allowsinglehopcircuits %>
+<% end -%>
+<% if exitnodes -%>
+ExitNodes <%= exitnodes %>
+<% end -%>
+<% if strictnodes -%>
+StrictNodes <%= strictnodes %>
+<% end -%>

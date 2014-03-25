@@ -26,17 +26,17 @@ class tor::params {
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
   $socksport = $::tor_socksport ? {
-    undef   => '127.0.0.1:9050',
+    undef   => [ '127.0.0.1:9050' ],
     default => $::tor_socksport,
   }
 
   $sockspolicy = $::tor_sockspolicy ? {
-    undef   => 'accept *:*',
+    undef   => [ 'accept *:*' ],
     default => $::tor_sockspolicy,
   }
 
   $orport = $::tor_orport ? {
-    undef   => '0',
+    undef   => [ '0' ],
     default => $::tor_orport,
   }
 
@@ -56,7 +56,7 @@ class tor::params {
   }
 
   $dirport = $::tor_dirport ? {
-    undef   => '0',
+    undef   => [ '0' ],
     default => $::tor_dirport,
   }
 
@@ -66,12 +66,25 @@ class tor::params {
     default => $::tor_exitpolicy,
   }
 
+  $cookieauthentication = $::tor_cookieauthentication ? {
+    undef   => '0',
+    default => $::tor_cookieauthentication,
+  }
+
   # If it's undef, that's fine
   $address = $::tor_address
   $outboundbindaddress = $::tor_outboundbindaddress
   $nickname = $::tor_nickname
   $myfamily = $::tor_myfamily
   $contactinfo = $::tor_contactinfo
+  $controlport = $::tor_controlport
+  $hashedcontrolpassword  = $::tor_hashedcontrolpassword
+  $cookieauthentication   = $::tor_cookieauthentication
+  $excludesinglehoprelays = $::tor_excludesinglehoprelays
+  $enforcedistinctsubnets = $::tor_enforcedistinctsubnets
+  $allowsinglehopcircuits = $::tor_allowsinglehopcircuits
+  $exitnodes              = $::tor_exitnodes
+  $strictnodes            = $::tor_strictnodes
 
   ######################################################################
 
@@ -152,6 +165,9 @@ class tor::params {
           $baseurl_string = 'el'  # must be lower case
         }
       }
+    }
+    'Debian': {
+        $baseurl_string = 'deb'  # must be lower case
     }
     default: {
       fail("Unsupported platform: ${::osfamily}")
