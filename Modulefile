@@ -5,7 +5,7 @@ author 'razorsedge'
 license 'Apache License, Version 2.0'
 project_page 'https://github.com/razorsedge/puppet-tor'
 source 'git://github.com/razorsedge/puppet-tor.git'
-summary 'Manage the Tor onion router.'
+summary 'Deploy the Tor onion router.'
 description 'https://www.torproject.org/'
 dependency 'puppetlabs/stdlib', '>=2.2.0'
 
