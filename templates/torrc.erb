@@ -2,13 +2,13 @@
 ### File managed by Puppet
 ###
 
-<% socksport.each do |socksportarray| -%>
+<% @socksport.each do |socksportarray| -%>
 SocksPort <%= socksportarray %>
 <% end -%>
-<% sockspolicy.each do |sockspolicyarray| -%>
+<% @sockspolicy.each do |sockspolicyarray| -%>
 SocksPolicy <%= sockspolicyarray %>
 <% end -%>
-<% orport.each do |orportarray| -%>
+<% @orport.each do |orportarray| -%>
 ORPort <%= orportarray %>
 <% end -%>
 <% if @address -%>
@@ -20,12 +20,12 @@ OutboundBindAddress <%= outboundbindaddress %>
 <% if @nickname -%>
 Nickname <%= nickname %>
 <% end -%>
-BandwidthRate <%= bandwidthrate %>
-BandwidthBurst <%= bandwidthburst %>
+BandwidthRate <%= @bandwidthrate %>
+BandwidthBurst <%= @bandwidthburst %>
 <% if @contactinfo -%>
 ContactInfo <%= contactinfo %>
 <% end -%>
-<% dirport.each do |dirportarray| -%>
+<% @dirport.each do |dirportarray| -%>
 DirPort <%= dirportarray %>
 <% end -%>
 <% if @dirportfrontpage -%>
@@ -34,7 +34,7 @@ DirPortFrontPage <%= dirportfrontpage %>
 <% if @myfamily -%>
 MyFamily <%= myfamily %>
 <% end -%>
-<% exitpolicy.each do |exitpolicyarray| -%>
+<% @exitpolicy.each do |exitpolicyarray| -%>
 ExitPolicy <%= exitpolicyarray %>
 <% end -%>
-NumCpus <%= numcpus %>
+NumCpus <%= @numcpus %>

@@ -26,17 +26,17 @@ class tor::params {
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
   $socksport = $::tor_socksport ? {
-    undef   => '127.0.0.1:9050',
+    undef   => [ '127.0.0.1:9050' ],
     default => $::tor_socksport,
   }
 
   $sockspolicy = $::tor_sockspolicy ? {
-    undef   => 'accept *:*',
+    undef   => [ 'accept *:*' ],
     default => $::tor_sockspolicy,
   }
 
   $orport = $::tor_orport ? {
-    undef   => '0',
+    undef   => [],
     default => $::tor_orport,
   }
 
@@ -56,7 +56,7 @@ class tor::params {
   }
 
   $dirport = $::tor_dirport ? {
-    undef   => '0',
+    undef   => [],
     default => $::tor_dirport,
   }
 
