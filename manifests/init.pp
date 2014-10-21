@@ -250,7 +250,7 @@ class tor (
     ensure  => $file_ensure,
     mode    => '0644',
     owner   => 'root',
-    group   => '_tor',
+    group   => 'root',
     content => template('tor/torrc.erb'),
     require => Package[$package_name],
     notify  => Service[$service_name],
