@@ -24,17 +24,17 @@
 #   The IP address or fully qualified domain name of this server. You can leave
 #   this unset, and Tor will guess your IP address. This IP address is the one
 #   used to tell clients and other servers where to find your Tor server; it
-#   doesn’t affect the IP that your Tor client binds to.
+#   doesn't affect the IP that your Tor client binds to.
 #   Default: none
 #
 # [*outboundbindaddress*]
 #   Make all outbound connections originate from the IP address specified. This
 #   is only useful when you have multiple network interfaces, and you want all
-#   of Tor’s outgoing connections to use a single one.
+#   of Tor's outgoing connections to use a single one.
 #   Default: none
 #
 # [*nickname*]
-#   Set the server’s nickname to 'name'. Nicknames must be between 1 and 19
+#   Set the server's nickname to 'name'. Nicknames must be between 1 and 19
 #   characters inclusive, and must contain only the characters [a-zA-Z0-9].
 #   Default: none
 #
