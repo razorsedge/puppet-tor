@@ -142,14 +142,38 @@ class tor::params {
     $safe_service_hasstatus = $service_hasstatus
   }
 
+  if $::operatingsystemmajrelease { # facter 1.7+
+    $majdistrelease = $::operatingsystemmajrelease
+  } elsif $::lsbmajdistrelease {    # requires LSB to already be installed
+    $majdistrelease = $::lsbmajdistrelease
+  } elsif $::os_maj_version {       # requires stahnma/epel
+    $majdistrelease = $::os_maj_version
+  } else {
+    $majdistrelease = regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1')
+  }
+
   case $::osfamily {
     'RedHat': {
       case $::operatingsystem {
         'Fedora': {
-          $baseurl_string = 'fc'  # must be lower case
+          case $majdistrelease {
+            '19', '20', '21': {
+              $baseurl_string = 'fc'  # must be lower case
+            }
+            default: {
+              fail("Your operating system release ${::operatingsystem} ${majdistrelease} is not supported.")
+            }
+          }
         }
         default: {
-          $baseurl_string = 'el'  # must be lower case
+          case $majdistrelease {
+            '6', '7': {
+              $baseurl_string = 'el'  # must be lower case
+            }
+            default: {
+              fail("Your operating system release ${::operatingsystem} ${majdistrelease} is not supported.")
+            }
+          }
         }
       }
     }

@@ -58,10 +58,7 @@ class tor::yum (
         descr    => 'Tor repo',
         enabled  => 1,
         gpgcheck => 1,
-        gpgkey   => $majdistrelease ? {
-          '5'     => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.EL5.asc",
-          default => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
-        },
+        gpgkey   => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
         baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${majdistrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
@@ -70,10 +67,7 @@ class tor::yum (
         descr    => 'Tor testing repo',
         enabled  => 0,
         gpgcheck => 1,
-        gpgkey   => $majdistrelease ? {
-          '5'     => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.EL5.asc",
-          default => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
-        },
+        gpgkey   => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
         baseurl  => "${yum_server}${yum_path}/tor-testing/${tor::params::baseurl_string}/${majdistrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
