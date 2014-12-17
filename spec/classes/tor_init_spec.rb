@@ -25,7 +25,6 @@ describe 'tor', :type => 'class' do
       :operatingsystemrelease => '6'
     }
     end
-    it { should contain_class('tor::yum') }
     it { should contain_package('tor').with_ensure('present') }
     it { should contain_file('/etc/tor/torrc').with(
       :ensure => 'present',
@@ -97,7 +96,6 @@ describe 'tor', :type => 'class' do
         :ensure => 'absent'
       }
       end
-      it { should contain_class('tor::yum') }
       it { should contain_package('tor').with_ensure('absent') }
       it { should contain_file('/etc/tor/torrc').with_ensure('absent') }
       it { should_not contain_file('/etc/tor/tor-exit-notice.html') }
@@ -112,7 +110,6 @@ describe 'tor', :type => 'class' do
         :autoupgrade => true
       }
       end
-      it { should contain_class('tor::yum') }
       it { should contain_package('tor').with_ensure('latest') }
       it { should contain_file('/etc/tor/torrc').with_ensure('present') }
       it { should_not contain_file('/etc/tor/tor-exit-notice.html') }
@@ -127,7 +124,6 @@ describe 'tor', :type => 'class' do
         :package_name => 'not-tor'
       }
       end
-      it { should contain_class('tor::yum') }
       it { should contain_package('not-tor').with_ensure('present') }
       it { should contain_file('/etc/tor/torrc').with_ensure('present') }
       it { should_not contain_file('/etc/tor/tor-exit-notice.html') }

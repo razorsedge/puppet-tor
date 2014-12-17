@@ -3,6 +3,9 @@
 require 'spec_helper'
 
 describe 'tor::yum', :type => 'class' do
+  let :pre_condition do
+    "class {'tor': }"
+  end
 
   context 'on a non-supported operatingsystem' do
     let :facts do {
