@@ -1,0 +1,45 @@
+{
+  "name": "razorsedge-tor",
+  "version": "1.1.0",
+  "author": "razorsedge",
+  "summary": "Deploy the Tor onion router.",
+  "license": "Apache License, Version 2.0",
+  "source": "https://github.com/razorsedge/puppet-tor.git",
+  "project_page": "https://github.com/razorsedge/puppet-tor",
+  "issues_url": "https://github.com/razorsedge/puppet-tor/issues",
+  "tags": [ "OEL", "CentOS", "RHEL", "rhel", "Fedora", "tor" ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=2.2.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [ "19", "20", "21" ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [ "6", "7" ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [ "6", "7" ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [ "6", "7" ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">=2.7.20 <4.0.0"
+    }
+  ]
+}

@@ -1,9 +1,19 @@
-require 'rubygems'
 require 'puppetlabs_spec_helper/rake_tasks'
+require 'puppet-lint/tasks/puppet-lint'
 
-desc "Run visual spec tests on an existing fixtures directory"
-RSpec::Core::RakeTask.new(:spec_standalonev) do |t|
-  t.rspec_opts = ['--color', '--format documentation']
-  t.pattern = 'spec/{classes,defines,unit}/**/*_spec.rb'
+PuppetLint.configuration.fail_on_warnings
+PuppetLint.configuration.send('relative')
+PuppetLint.configuration.send('disable_80chars')
+PuppetLint.configuration.send('disable_class_inherits_from_params_class')
+PuppetLint.configuration.send('disable_class_parameter_defaults')
+PuppetLint.configuration.send('disable_documentation')
+PuppetLint.configuration.send('disable_single_quote_string_with_variables')
+PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
+
+PuppetSyntax.exclude_paths = ["pkg/**/*"]
+PuppetSyntax.hieradata_paths = ["**/data/**/*.yaml", "hieradata/**/*.yaml", "hiera*.yaml"]
+
+desc "Check puppet metadata.json with metadata-json-lint."
+task :metadata do
+  sh "metadata-json-lint metadata.json"
 end
-

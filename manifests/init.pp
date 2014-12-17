@@ -24,17 +24,17 @@
 #   The IP address or fully qualified domain name of this server. You can leave
 #   this unset, and Tor will guess your IP address. This IP address is the one
 #   used to tell clients and other servers where to find your Tor server; it
-#   doesn’t affect the IP that your Tor client binds to.
+#   doesn't affect the IP that your Tor client binds to.
 #   Default: none
 #
 # [*outboundbindaddress*]
 #   Make all outbound connections originate from the IP address specified. This
 #   is only useful when you have multiple network interfaces, and you want all
-#   of Tor’s outgoing connections to use a single one.
+#   of Tor's outgoing connections to use a single one.
 #   Default: none
 #
 # [*nickname*]
-#   Set the server’s nickname to 'name'. Nicknames must be between 1 and 19
+#   Set the server's nickname to 'name'. Nicknames must be between 1 and 19
 #   characters inclusive, and must contain only the characters [a-zA-Z0-9].
 #   Default: none
 #
@@ -62,6 +62,12 @@
 #
 # [*contactinfo*]
 #   Administrative contact information for server.
+#   Default: none
+#
+# [*dirportfrontpage*]
+#   When this option is set, it takes an HTML file and publishes it as "/" on
+#   the DirPort. Now relay operators can provide a disclaimer without needing
+#   to set up a separate webserver.
 #   Default: none
 #
 # [*dirport*]
@@ -159,6 +165,7 @@
 #    numcpus             => '2',
 #    contactinfo         => 'Random Person <nobody AT example dot com>',
 #    dirport             => [ '80 NoListen', '10.2.3.4:9091 NoAdvertise' ],
+#    dirportfrontpage    => '/etc/tor/tor-exit-notice.html',
 #    exitpolicy          => [ 'reject *:*' ],
 #  }
 #
@@ -183,6 +190,7 @@ class tor (
   $numcpus             = $tor::params::numcpus,
   $contactinfo         = $tor::params::contactinfo,
   $dirport             = $tor::params::dirport,
+  $dirportfrontpage    = $tor::params::dirportfrontpage,
   $exitpolicy          = $tor::params::exitpolicy,
 
   $yum_server          = $tor::params::yum_server,
@@ -200,6 +208,13 @@ class tor (
   $service_hasrestart  = $tor::params::safe_service_hasrestart,
   $service_hasstatus   = $tor::params::service_hasstatus
 ) inherits tor::params {
+  # Validate our arrays
+  validate_array($socksport)
+  validate_array($sockspolicy)
+  validate_array($orport)
+  validate_array($dirport)
+  validate_array($exitpolicy)
+
   # Validate our booleans
   validate_bool($autoupgrade)
   validate_bool($service_enable)
@@ -254,6 +269,17 @@ class tor (
     content => template('tor/torrc.erb'),
     require => Package[$package_name],
     notify  => Service[$service_name],
+  }
+
+  if $dirportfrontpage {
+    file { $dirportfrontpage :
+      ensure  => $file_ensure,
+      mode    => '0644',
+      owner   => 'root',
+      group   => '_tor',
+      content => template('tor/exit-notice.html.erb'),
+      require => Package[$package_name],
+    }
   }
 
   service { $service_name :

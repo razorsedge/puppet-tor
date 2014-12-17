@@ -26,17 +26,17 @@ class tor::params {
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
   $socksport = $::tor_socksport ? {
-    undef   => '127.0.0.1:9050',
+    undef   => [ '127.0.0.1:9050', ],
     default => $::tor_socksport,
   }
 
   $sockspolicy = $::tor_sockspolicy ? {
-    undef   => 'accept *:*',
+    undef   => [ 'accept *:*', ],
     default => $::tor_sockspolicy,
   }
 
   $orport = $::tor_orport ? {
-    undef   => '0',
+    undef   => [ '0', ],
     default => $::tor_orport,
   }
 
@@ -56,13 +56,12 @@ class tor::params {
   }
 
   $dirport = $::tor_dirport ? {
-    undef   => '0',
+    undef   => [ '0', ],
     default => $::tor_dirport,
   }
 
   $exitpolicy = $::tor_exitpolicy ? {
     undef   => [ 'reject *:25', 'reject *:119', 'reject *:135-139', 'reject *:445', 'reject *:563', 'reject *:1214', 'reject *:4661-4666', 'reject *:6346-6429', 'reject *:6699', 'reject *:6881-6999', 'accept *:*' ],
-    #undef   => 'reject *:25,reject *:119,reject *:135-139,reject *:445,reject *:563,reject *:1214,reject *:4661-4666,reject *:6346-6429,reject *:6699,reject *:6881-6999,accept *:*',
     default => $::tor_exitpolicy,
   }
 
@@ -72,6 +71,7 @@ class tor::params {
   $nickname = $::tor_nickname
   $myfamily = $::tor_myfamily
   $contactinfo = $::tor_contactinfo
+  $dirportfrontpage = $::tor_dirportfrontpage
 
   ######################################################################
 
@@ -142,14 +142,38 @@ class tor::params {
     $safe_service_hasstatus = $service_hasstatus
   }
 
+  if $::operatingsystemmajrelease { # facter 1.7+
+    $majdistrelease = $::operatingsystemmajrelease
+  } elsif $::lsbmajdistrelease {    # requires LSB to already be installed
+    $majdistrelease = $::lsbmajdistrelease
+  } elsif $::os_maj_version {       # requires stahnma/epel
+    $majdistrelease = $::os_maj_version
+  } else {
+    $majdistrelease = regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1')
+  }
+
   case $::osfamily {
     'RedHat': {
       case $::operatingsystem {
         'Fedora': {
-          $baseurl_string = 'fc'  # must be lower case
+          case $majdistrelease {
+            '19', '20', '21': {
+              $baseurl_string = 'fc'  # must be lower case
+            }
+            default: {
+              fail("Your operating system release ${::operatingsystem} ${majdistrelease} is not supported.")
+            }
+          }
         }
         default: {
-          $baseurl_string = 'el'  # must be lower case
+          case $majdistrelease {
+            '6', '7': {
+              $baseurl_string = 'el'  # must be lower case
+            }
+            default: {
+              fail("Your operating system release ${::operatingsystem} ${majdistrelease} is not supported.")
+            }
+          }
         }
       }
     }

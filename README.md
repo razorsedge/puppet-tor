@@ -1,5 +1,5 @@
-Tor Module
-==========
+Puppet Tor Module
+=================
 
 master branch [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tor.png?branch=master)](http://travis-ci.org/razorsedge/puppet-tor)
 develop branch [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tor.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-tor)
@@ -7,7 +7,7 @@ develop branch [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-t
 Introduction
 ------------
 
-This module installs the [Tor](https://www.torproject.org/) onion router.
+This module installs the [Tor](https://www.torproject.org/) onion router from the Tor Project's software repository.  Tor protects you by bouncing your communications around a distributed network of relays run by volunteers all around the world: it prevents somebody watching your Internet connection from learning what sites you visit, and it prevents the sites you visit from learning your physical location. Tor works with many of your existing applications, including web browsers, instant messaging clients, remote login, and other applications based on the TCP protocol.
 
 Actions:
 
@@ -48,6 +48,11 @@ TODO
 
 * Allow users to choose Fedora or EPEL YUM repos?
 * Allow for removal of yumrepo.
+
+Contributing
+------------
+
+Please see DEVELOP.md for contribution information.
 
 License
 -------

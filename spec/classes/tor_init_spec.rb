@@ -20,8 +20,9 @@ describe 'tor', :type => 'class' do
   context 'on a supported operatingsystem, default parameters' do
     let(:params) {{}}
     let :facts do {
-      :osfamily        => 'RedHat',
-      :operatingsystem => 'CentOS'
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'CentOS',
+      :operatingsystemrelease => '6'
     }
     end
     it { should contain_class('tor::yum') }
@@ -32,6 +33,7 @@ describe 'tor', :type => 'class' do
       :owner  => 'root',
       :group  => '_tor'
     )}
+    it { should_not contain_file('/etc/tor/tor-exit-notice.html') }
     it { should contain_service('tor').with(
       :ensure     => 'running',
       :enable     => true,
@@ -98,6 +100,7 @@ describe 'tor', :type => 'class' do
       it { should contain_class('tor::yum') }
       it { should contain_package('tor').with_ensure('absent') }
       it { should contain_file('/etc/tor/torrc').with_ensure('absent') }
+      it { should_not contain_file('/etc/tor/tor-exit-notice.html') }
       it { should contain_service('tor').with(
         :ensure => 'stopped',
         :enable => false
@@ -112,6 +115,7 @@ describe 'tor', :type => 'class' do
       it { should contain_class('tor::yum') }
       it { should contain_package('tor').with_ensure('latest') }
       it { should contain_file('/etc/tor/torrc').with_ensure('present') }
+      it { should_not contain_file('/etc/tor/tor-exit-notice.html') }
       it { should contain_service('tor').with(
         :ensure => 'running',
         :enable => true
@@ -126,6 +130,35 @@ describe 'tor', :type => 'class' do
       it { should contain_class('tor::yum') }
       it { should contain_package('not-tor').with_ensure('present') }
       it { should contain_file('/etc/tor/torrc').with_ensure('present') }
+      it { should_not contain_file('/etc/tor/tor-exit-notice.html') }
+      it { should contain_service('tor').with(
+        :ensure => 'running',
+        :enable => true
+      )}
+    end
+
+    describe 'dirportfrontpage => /etc/tor/tor-exit-notice.html' do
+      let :params do {
+        :dirportfrontpage => '/etc/tor/tor-exit-notice.html',
+        :address          => '1.2.3.4',
+        :contactinfo      => 'root@localhost'
+      }
+      end
+      it { should contain_class('tor::yum') }
+      it { should contain_package('tor').with_ensure('present') }
+      it { should contain_file('/etc/tor/torrc').with_ensure('present') }
+      it { should contain_file('/etc/tor/tor-exit-notice.html').with(
+        :ensure => 'present',
+        :mode   => '0644',
+        :owner  => 'root',
+        :group  => '_tor'
+      )}
+      it 'should contain File[/etc/tor/tor-exit-notice.html] with correct contents' do
+        verify_contents(subject, '/etc/tor/tor-exit-notice.html', [
+          '1.2.3.4 should not constitute probable cause to seize the',
+          'email the <a href="mailto:root@localhost">maintainer</a>. If',
+        ])
+      end
       it { should contain_service('tor').with(
         :ensure => 'running',
         :enable => true
