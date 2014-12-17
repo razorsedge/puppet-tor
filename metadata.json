@@ -7,7 +7,7 @@
   "source": "https://github.com/razorsedge/puppet-tor.git",
   "project_page": "https://github.com/razorsedge/puppet-tor",
   "issues_url": "https://github.com/razorsedge/puppet-tor/issues",
-  "tags": [ "OEL", "CentOS", "RHEL", "rhel", "tor" ],
+  "tags": [ "OEL", "CentOS", "RHEL", "rhel", "Fedora", "tor" ],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -15,6 +15,10 @@
     }
   ],
   "operatingsystem_support": [
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [ "19", "20", "21" ]
+    },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [ "6", "7" ]
