@@ -35,6 +35,7 @@ describe 'tor::yum', :type => 'class' do
         :priority => '50',
         :protect  => '0'
       )}
+      it { should contain_file('/etc/yum.repos.d/tor.repo') }
       it { should contain_yumrepo('tor-testing').with(
         :descr    => 'Tor testing repo',
         :enabled  => '0',
@@ -44,6 +45,7 @@ describe 'tor::yum', :type => 'class' do
         :priority => '50',
         :protect  => '0'
       )}
+      it { should contain_file('/etc/yum.repos.d/tor-testing.repo') }
     end
 
     context 'for operatingsystem RedHat, majdistrelease 6' do
@@ -63,6 +65,7 @@ describe 'tor::yum', :type => 'class' do
         :priority => '50',
         :protect  => '0'
       )}
+      it { should contain_file('/etc/yum.repos.d/tor.repo') }
       it { should contain_yumrepo('tor-testing').with(
         :descr    => 'Tor testing repo',
         :enabled  => '0',
@@ -72,6 +75,7 @@ describe 'tor::yum', :type => 'class' do
         :priority => '50',
         :protect  => '0'
       )}
+      it { should contain_file('/etc/yum.repos.d/tor-testing.repo') }
     end
 
     context 'for operatingsystem Fedora' do
@@ -93,6 +97,7 @@ describe 'tor::yum', :type => 'class' do
             :priority => '50',
             :protect  => '0'
           )}
+          it { should contain_file('/etc/yum.repos.d/tor.repo') }
           it { should contain_yumrepo('tor-testing').with(
             :descr    => 'Tor testing repo',
             :enabled  => '0',
@@ -102,6 +107,7 @@ describe 'tor::yum', :type => 'class' do
             :priority => '50',
             :protect  => '0'
           )}
+          it { should contain_file('/etc/yum.repos.d/tor-testing.repo') }
         end
       end
     end

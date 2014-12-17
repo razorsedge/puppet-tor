@@ -78,6 +78,19 @@ class tor::yum (
         priority => $yum_priority,
         protect  => $yum_protect,
       }
+
+      file { '/etc/yum.repos.d/tor.repo':
+        ensure => 'file',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+      }
+      file { '/etc/yum.repos.d/tor-testing.repo':
+        ensure => 'file',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+      }
     }
     'Fedora': {
       yumrepo { 'tor':
@@ -97,6 +110,19 @@ class tor::yum (
         baseurl  => "${yum_server}${yum_path}/tor-testing/${tor::params::baseurl_string}/${::operatingsystemrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
+      }
+
+      file { '/etc/yum.repos.d/tor.repo':
+        ensure => 'file',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+      }
+      file { '/etc/yum.repos.d/tor-testing.repo':
+        ensure => 'file',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
       }
     }
     default: { }
