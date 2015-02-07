@@ -154,7 +154,7 @@ describe 'tor', :type => 'class' do
         :group  => '_tor'
       )}
       it 'should contain File[/etc/tor/tor-exit-notice.html] with correct contents' do
-        verify_contents(subject, '/etc/tor/tor-exit-notice.html', [
+        verify_contents(catalogue, '/etc/tor/tor-exit-notice.html', [
           '1.2.3.4 should not constitute probable cause to seize the',
           'email the <a href="mailto:root@localhost">maintainer</a>. If',
         ])
