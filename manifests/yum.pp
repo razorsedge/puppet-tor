@@ -50,16 +50,12 @@ class tor::yum (
   case $::operatingsystem {
     'RedHat', 'CentOS', 'Scientific', 'SLC', 'Ascendos', 'PSBM', 'OVS', 'OEL',
     'OracleLinux': {
-      $majdistrelease = $::lsbmajdistrelease ? {
-        ''      => regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1'),
-        default => $::lsbmajdistrelease,
-      }
       yumrepo { 'tor':
         descr    => 'Tor repo',
         enabled  => 1,
         gpgcheck => 1,
         gpgkey   => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
-        baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${majdistrelease}/\$basearch/",
+        baseurl  => "${yum_server}${yum_path}/${tor::params::baseurl_string}/${tor::params::majdistrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
       }
@@ -68,7 +64,7 @@ class tor::yum (
         enabled  => 0,
         gpgcheck => 1,
         gpgkey   => "${yum_server}${yum_path}/RPM-GPG-KEY-torproject.org.asc",
-        baseurl  => "${yum_server}${yum_path}/tor-testing/${tor::params::baseurl_string}/${majdistrelease}/\$basearch/",
+        baseurl  => "${yum_server}${yum_path}/tor-testing/${tor::params::baseurl_string}/${tor::params::majdistrelease}/\$basearch/",
         priority => $yum_priority,
         protect  => $yum_protect,
       }
