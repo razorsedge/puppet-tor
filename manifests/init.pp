@@ -64,6 +64,22 @@
 #   Administrative contact information for server.
 #   Default: none
 #
+# [*controlport*]
+#   The port on which Tor will listen for local connections from Tor
+#   controller applications.
+#   If you enable the controlport, be sure to set hashedcontrolpassword or
+#   cookieauthentication as well.
+#   Default: none
+#
+# [*hashedcontrolpassword*]
+#   Set hashed password to access the controlport.
+#   Default: none
+#
+# [*cookieauthentication*]
+#   Enable cookie authentication to access the controlport.
+#   Can be set to 1 to be enabled.
+#   Default: none
+#
 # [*dirportfrontpage*]
 #   When this option is set, it takes an HTML file and publishes it as "/" on
 #   the DirPort. Now relay operators can provide a disclaimer without needing
@@ -178,35 +194,38 @@
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class tor (
-  $socksport           = $tor::params::socksport,
-  $sockspolicy         = $tor::params::sockspolicy,
-  $orport              = $tor::params::orport,
-  $address             = $tor::params::address,
-  $outboundbindaddress = $tor::params::outboundbindaddress,
-  $nickname            = $tor::params::nickname,
-  $myfamily            = $tor::params::myfamily,
-  $bandwidthrate       = $tor::params::bandwidthrate,
-  $bandwidthburst      = $tor::params::bandwidthburst,
-  $numcpus             = $tor::params::numcpus,
-  $contactinfo         = $tor::params::contactinfo,
-  $dirport             = $tor::params::dirport,
-  $dirportfrontpage    = $tor::params::dirportfrontpage,
-  $exitpolicy          = $tor::params::exitpolicy,
+  $socksport             = $tor::params::socksport,
+  $sockspolicy           = $tor::params::sockspolicy,
+  $orport                = $tor::params::orport,
+  $address               = $tor::params::address,
+  $outboundbindaddress   = $tor::params::outboundbindaddress,
+  $nickname              = $tor::params::nickname,
+  $myfamily              = $tor::params::myfamily,
+  $bandwidthrate         = $tor::params::bandwidthrate,
+  $bandwidthburst        = $tor::params::bandwidthburst,
+  $numcpus               = $tor::params::numcpus,
+  $contactinfo           = $tor::params::contactinfo,
+  $controlport           = $tor::params::controlport,
+  $hashedcontrolpassword = $tor::params::hashedcontrolpassword,
+  $cookieauthentication  = $tor::params::cookieauthentication,
+  $dirport               = $tor::params::dirport,
+  $dirportfrontpage      = $tor::params::dirportfrontpage,
+  $exitpolicy            = $tor::params::exitpolicy,
 
-  $yum_server          = $tor::params::yum_server,
-  $yum_path            = $tor::params::yum_path,
-  $yum_priority        = $tor::params::yum_priority,
-  $yum_protect         = $tor::params::yum_protect,
+  $yum_server            = $tor::params::yum_server,
+  $yum_path              = $tor::params::yum_path,
+  $yum_priority          = $tor::params::yum_priority,
+  $yum_protect           = $tor::params::yum_protect,
 
-  $ensure              = $tor::params::ensure,
-  $autoupgrade         = $tor::params::safe_autoupgrade,
-  $package_name        = $tor::params::package_name,
-  $file_name           = $tor::params::file_name,
-  $service_ensure      = $tor::params::service_ensure,
-  $service_name        = $tor::params::service_name,
-  $service_enable      = $tor::params::safe_service_enable,
-  $service_hasrestart  = $tor::params::safe_service_hasrestart,
-  $service_hasstatus   = $tor::params::service_hasstatus
+  $ensure                = $tor::params::ensure,
+  $autoupgrade           = $tor::params::safe_autoupgrade,
+  $package_name          = $tor::params::package_name,
+  $file_name             = $tor::params::file_name,
+  $service_ensure        = $tor::params::service_ensure,
+  $service_name          = $tor::params::service_name,
+  $service_enable        = $tor::params::safe_service_enable,
+  $service_hasrestart    = $tor::params::safe_service_hasrestart,
+  $service_hasstatus     = $tor::params::service_hasstatus
 ) inherits tor::params {
   # Validate our arrays
   validate_array($socksport)

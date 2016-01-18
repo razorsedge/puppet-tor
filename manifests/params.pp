@@ -72,6 +72,9 @@ class tor::params {
   $myfamily = $::tor_myfamily
   $contactinfo = $::tor_contactinfo
   $dirportfrontpage = $::tor_dirportfrontpage
+  $controlport = $::tor_controlport
+  $hashedcontrolpassword = $::tor_hashedcontrolpassword
+  $cookieauthentication = $::tor_cookieauthentication
 
   ######################################################################
 

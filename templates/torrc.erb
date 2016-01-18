@@ -25,6 +25,15 @@ BandwidthBurst <%= @bandwidthburst %>
 <% if @contactinfo -%>
 ContactInfo <%= @contactinfo %>
 <% end -%>
+<% if @controlport -%>
+ControlPort <%= @controlport %>
+  <%- if @hashedcontrolpassword -%>
+HashedControlPassword <%= @hashedcontrolpassword %>
+  <%- end -%>
+  <%- if @cookieauthentication -%>
+CookieAuthentication <%= @cookieauthentication %>
+  <%- end -%>
+<% end -%>
 <% @dirport.each do |dirportarray| -%>
 DirPort <%= dirportarray %>
 <% end -%>
