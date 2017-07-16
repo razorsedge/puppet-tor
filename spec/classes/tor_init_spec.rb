@@ -22,7 +22,8 @@ describe 'tor', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6'
+      :operatingsystemrelease => '6',
+      :operatingsystemmajrelease => '6'
     }
     end
     it { should contain_class('tor::yum') }
@@ -48,7 +49,8 @@ describe 'tor', :type => 'class' do
 #          let :facts do {
 #            :osfamily               => 'RedHat',
 #            :operatingsystem        => 'RedHat',
-#            :operatingsystemrelease => mdr
+#            :operatingsystemrelease => mdr,
+#            :operatingsystemmajrelease => mdr
 #          }
 #          end
 #          it { should contain_package('tor').with_ensure('present') }
@@ -69,7 +71,8 @@ describe 'tor', :type => 'class' do
 #          let :facts do {
 #            :osfamily               => 'RedHat',
 #            :operatingsystem        => 'Fedora',
-#            :operatingsystemrelease => mdr
+#            :operatingsystemrelease => mdr,
+#            :operatingsystemmajrelease => mdr
 #          }
 #          end
 #          it { should contain_package('tor').with_ensure('present') }
@@ -88,7 +91,8 @@ describe 'tor', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6'
+      :operatingsystemrelease => '6',
+      :operatingsystemmajrelease => '6'
     }
     end
 

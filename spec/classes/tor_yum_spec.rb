@@ -23,7 +23,8 @@ describe 'tor::yum', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'RedHat',
-        :operatingsystemrelease => '6.0'
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6'
       }
       end
       it { should contain_yumrepo('tor').with(
@@ -55,7 +56,8 @@ describe 'tor::yum', :type => 'class' do
           let :facts do {
             :osfamily               => 'RedHat',
             :operatingsystem        => 'Fedora',
-            :operatingsystemrelease => mdr
+            :operatingsystemrelease => mdr,
+            :operatingsystemmajrelease => mdr
           }
           end
           it { should contain_yumrepo('tor').with(

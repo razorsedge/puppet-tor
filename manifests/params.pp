@@ -25,86 +25,114 @@ class tor::params {
 
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
-  $socksport = $::tor_socksport ? {
-    undef   => [ '127.0.0.1:9050', ],
-    default => $::tor_socksport,
+  $tor_socksport = getvar('::tor_socksport')
+  if $tor_socksport {
+    $socksport = $::tor_socksport
+  } else {
+    $socksport = [ '127.0.0.1:9050', ]
   }
 
-  $sockspolicy = $::tor_sockspolicy ? {
-    undef   => [ 'accept *:*', ],
-    default => $::tor_sockspolicy,
+  $tor_sockspolicy = getvar('::tor_sockspolicy')
+  if $tor_sockspolicy {
+    $sockspolicy = $::tor_sockspolicy
+  } else {
+    $sockspolicy = [ 'accept *:*', ]
   }
 
-  $orport = $::tor_orport ? {
-    undef   => [ '0', ],
-    default => $::tor_orport,
+  $tor_orport = getvar('::tor_orport')
+  if $tor_orport {
+    $orport = $::tor_orport
+  } else {
+    $orport = [ '0', ]
   }
 
-  $bandwidthrate = $::tor_bandwidthrate ? {
-    undef   => '5 MB',
-    default => $::tor_bandwidthrate,
+  $tor_bandwidthrate = getvar('::tor_bandwidthrate')
+  if $tor_bandwidthrate {
+    $bandwidthrate = $::tor_bandwidthrate
+  } else {
+    $bandwidthrate = '5 MB'
   }
 
-  $bandwidthburst = $::tor_bandwidthburst ? {
-    undef   => '10 MB',
-    default => $::tor_bandwidthburst,
+  $tor_bandwidthburst = getvar('::tor_bandwidthburst')
+  if $tor_bandwidthburst {
+    $bandwidthburst = $::tor_bandwidthburst
+  } else {
+    $bandwidthburst = '10 MB'
   }
 
-  $numcpus = $::tor_numcpus ? {
-    undef   => '0',
-    default => $::tor_numcpus,
+  $tor_numcpus = getvar('::tor_numcpus')
+  if $tor_numcpus {
+    $numcpus = $::tor_numcpus
+  } else {
+    $numcpus = '0'
   }
 
-  $dirport = $::tor_dirport ? {
-    undef   => [ '0', ],
-    default => $::tor_dirport,
+  $tor_dirport = getvar('::tor_dirport')
+  if $tor_dirport {
+    $dirport = $::tor_dirport
+  } else {
+    $dirport = [ '0', ]
   }
 
-  $exitpolicy = $::tor_exitpolicy ? {
-    undef   => [ 'reject *:25', 'reject *:119', 'reject *:135-139', 'reject *:445', 'reject *:563', 'reject *:1214', 'reject *:4661-4666', 'reject *:6346-6429', 'reject *:6699', 'reject *:6881-6999', 'accept *:*' ],
-    default => $::tor_exitpolicy,
+  $tor_exitpolicy = getvar('::tor_exitpolicy')
+  if $tor_exitpolicy {
+    $exitpolicy = $::tor_exitpolicy
+  } else {
+    $exitpolicy = [ 'reject *:25', 'reject *:119', 'reject *:135-139', 'reject *:445', 'reject *:563', 'reject *:1214', 'reject *:4661-4666', 'reject *:6346-6429', 'reject *:6699', 'reject *:6881-6999', 'accept *:*' ]
   }
 
   # If it's undef, that's fine
-  $address = $::tor_address
-  $outboundbindaddress = $::tor_outboundbindaddress
-  $nickname = $::tor_nickname
-  $myfamily = $::tor_myfamily
-  $contactinfo = $::tor_contactinfo
-  $dirportfrontpage = $::tor_dirportfrontpage
+  $address = getvar('::tor_address')
+  $outboundbindaddress = getvar('::tor_outboundbindaddress')
+  $nickname = getvar('::tor_nickname')
+  $myfamily = getvar('::tor_myfamily')
+  $contactinfo = getvar('::tor_contactinfo')
+  $dirportfrontpage = getvar('::tor_dirportfrontpage')
 
   ######################################################################
 
-  $ensure = $::tor_ensure ? {
-    undef   => 'present',
-    default => $::tor_ensure,
+  $tor_ensure = getvar('::tor_ensure')
+  if $tor_ensure {
+    $ensure = $::tor_ensure
+  } else {
+    $ensure = 'present'
   }
 
-  $package_name = $::tor_package_name ? {
-    undef   => 'tor',
-    default => $::tor_package_name,
+  $tor_package_name = getvar('::tor_package_name')
+  if $tor_package_name {
+    $package_name = $::tor_package_name
+  } else {
+    $package_name = 'tor'
   }
 
-  $file_name = $::tor_file_name ? {
-    undef   => '/etc/tor/torrc',
-    default => $::tor_file_name,
+  $tor_file_name = getvar('::tor_file_name')
+  if $tor_file_name {
+    $file_name = $::tor_file_name
+  } else {
+    $file_name = '/etc/tor/torrc'
   }
 
-  $service_ensure = $::tor_service_ensure ? {
-    undef   => 'running',
-    default => $::tor_service_ensure,
+  $tor_service_ensure = getvar('::tor_service_ensure')
+  if $tor_service_ensure {
+    $service_ensure = $::tor_service_ensure
+  } else {
+    $service_ensure = 'running'
   }
 
-  $service_name = $::tor_service_name ? {
-    undef   => 'tor',
-    default => $::tor_service_name,
+  $tor_service_name = getvar('::tor_service_name')
+  if $tor_service_name {
+    $service_name = $::tor_service_name
+  } else {
+    $service_name = 'tor'
   }
 
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
-  $autoupgrade = $::tor_autoupgrade ? {
-    undef   => false,
-    default => $::tor_autoupgrade,
+  $tor_autoupgrade = getvar('::tor_autoupgrade')
+  if $tor_autoupgrade {
+    $autoupgrade = $::tor_autoupgrade
+  } else {
+    $autoupgrade = false
   }
   if is_string($autoupgrade) {
     $safe_autoupgrade = str2bool($autoupgrade)
@@ -112,9 +140,11 @@ class tor::params {
     $safe_autoupgrade = $autoupgrade
   }
 
-  $service_enable = $::tor_service_enable ? {
-    undef   => true,
-    default => $::tor_service_enable,
+  $tor_service_enable = getvar('::tor_service_enable')
+  if $tor_service_enable {
+    $service_enable = $::tor_service_enable
+  } else {
+    $service_enable = true
   }
   if is_string($service_enable) {
     $safe_service_enable = str2bool($service_enable)
@@ -122,9 +152,11 @@ class tor::params {
     $safe_service_enable = $service_enable
   }
 
-  $service_hasrestart = $::tor_service_hasrestart ? {
-    undef   => true,
-    default => $::tor_service_hasrestart,
+  $tor_service_hasrestart = getvar('::tor_service_hasrestart')
+  if $tor_service_hasrestart {
+    $service_hasrestart = $::tor_service_hasrestart
+  } else {
+    $service_hasrestart = true
   }
   if is_string($service_hasrestart) {
     $safe_service_hasrestart = str2bool($service_hasrestart)
@@ -132,9 +164,11 @@ class tor::params {
     $safe_service_hasrestart = $service_hasrestart
   }
 
-  $service_hasstatus = $::tor_service_hasstatus ? {
-    undef   => true,
-    default => $::tor_service_hasstatus,
+  $tor_service_hasstatus = getvar('::tor_service_hasstatus')
+  if $tor_service_hasstatus {
+    $service_hasstatus = $::tor_service_hasstatus
+  } else {
+    $service_hasstatus = true
   }
   if is_string($service_hasstatus) {
     $safe_service_hasstatus = str2bool($service_hasstatus)
