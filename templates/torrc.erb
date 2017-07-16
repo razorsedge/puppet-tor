@@ -12,13 +12,13 @@ SocksPolicy <%= sockspolicyarray %>
 ORPort <%= orportarray %>
 <% end -%>
 <% if @address -%>
-Address <%= address %>
+Address <%= @address %>
 <% end -%>
 <% if @outboundbindaddress -%>
-OutboundBindAddress <%= outboundbindaddress %>
+OutboundBindAddress <%= @outboundbindaddress %>
 <% end -%>
 <% if @nickname -%>
-Nickname <%= nickname %>
+Nickname <%= @nickname %>
 <% end -%>
 BandwidthRate <%= @bandwidthrate %>
 BandwidthBurst <%= @bandwidthburst %>

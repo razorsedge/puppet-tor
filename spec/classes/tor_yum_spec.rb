@@ -21,9 +21,10 @@ describe 'tor::yum', :type => 'class' do
     context 'for operatingsystem RedHat, majdistrelease 6' do
       let(:params) {{}}
       let :facts do {
-        :osfamily                => 'RedHat',
-        :operatingsystem         => 'RedHat',
-        :operatingsystemrelease  => '6'
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'RedHat',
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6'
       }
       end
       it { should contain_yumrepo('tor').with(
@@ -53,9 +54,10 @@ describe 'tor::yum', :type => 'class' do
         describe "for majdistrelease #{mdr}" do
           let(:params) {{}}
           let :facts do {
-            :osfamily                => 'RedHat',
-            :operatingsystem         => 'Fedora',
-            :operatingsystemrelease  => mdr
+            :osfamily               => 'RedHat',
+            :operatingsystem        => 'Fedora',
+            :operatingsystemrelease => mdr,
+            :operatingsystemmajrelease => mdr
           }
           end
           it { should contain_yumrepo('tor').with(
