@@ -1,6 +1,6 @@
 {
   "name": "razorsedge-tor",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "razorsedge",
   "summary": "Deploy the Tor onion router.",
   "license": "Apache-2.0",
