@@ -22,7 +22,8 @@ describe 'tor', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6'
+      :operatingsystemrelease => '6',
+      :operatingsystemmajrelease => '6'
     }
     end
     it { should contain_class('tor::yum') }
@@ -48,7 +49,8 @@ describe 'tor', :type => 'class' do
 #          let :facts do {
 #            :osfamily               => 'RedHat',
 #            :operatingsystem        => 'RedHat',
-#            :operatingsystemrelease => mdr
+#            :operatingsystemrelease => mdr,
+#            :operatingsystemmajrelease => mdr
 #          }
 #          end
 #          it { should contain_package('tor').with_ensure('present') }
@@ -69,7 +71,8 @@ describe 'tor', :type => 'class' do
 #          let :facts do {
 #            :osfamily               => 'RedHat',
 #            :operatingsystem        => 'Fedora',
-#            :operatingsystemrelease => mdr
+#            :operatingsystemrelease => mdr,
+#            :operatingsystemmajrelease => mdr
 #          }
 #          end
 #          it { should contain_package('tor').with_ensure('present') }
@@ -88,7 +91,8 @@ describe 'tor', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6'
+      :operatingsystemrelease => '6',
+      :operatingsystemmajrelease => '6'
     }
     end
 
@@ -154,7 +158,7 @@ describe 'tor', :type => 'class' do
         :group  => '_tor'
       )}
       it 'should contain File[/etc/tor/tor-exit-notice.html] with correct contents' do
-        verify_contents(subject, '/etc/tor/tor-exit-notice.html', [
+        verify_contents(catalogue, '/etc/tor/tor-exit-notice.html', [
           '1.2.3.4 should not constitute probable cause to seize the',
           'email the <a href="mailto:root@localhost">maintainer</a>. If',
         ])

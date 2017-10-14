@@ -269,7 +269,7 @@ class tor (
 
   Class['tor::yum'] -> Class['tor']
 
-  class { 'tor::yum' :
+  class { '::tor::yum' :
     yum_server   => $yum_server,
     yum_path     => $yum_path,
     yum_priority => $yum_priority,
