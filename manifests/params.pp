@@ -88,6 +88,9 @@ class tor::params {
   $myfamily = getvar('::tor_myfamily')
   $contactinfo = getvar('::tor_contactinfo')
   $dirportfrontpage = getvar('::tor_dirportfrontpage')
+  $controlport = getvar('::tor_controlport')
+  $hashedcontrolpassword = getvar('::tor_hashedcontrolpassword')
+  $cookieauthentication = getvar('::tor_cookieauthentication')
 
   ######################################################################
 
